@@ -1,11 +1,10 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct RewardDetails
+public struct TurretInfo
 {
-    public string itemName;
-    public RewardType rewardType;
-    public int amount;
-    public Sprite icon;
+    public string turretName;
+    public TurretType turretType;
+    public GameObject icon;
     public float price;
 }
