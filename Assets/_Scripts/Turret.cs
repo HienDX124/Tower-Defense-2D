@@ -11,11 +11,26 @@ public class Turret : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform muzzleTrans;
     [SerializeField] private Transform bodyTrans;
+    [SerializeField] private float activeRadius;
+    [SerializeField] private CircleCollider2D _circleCollider2D;
     private Queue<Enemy> enemiesInRange;
-    void Start()
+    [SerializeField] private Transform shootRangeImgTrans;
+    private bool _isActive;
+    private void Awake()
     {
         enemiesInRange = new Queue<Enemy>();
+    }
+
+    void Start()
+    {
         currentDelayShoot = delayShoot;
+    }
+
+    private void OnValidate()
+    {
+        _circleCollider2D = GetComponent<CircleCollider2D>();
+        _circleCollider2D.radius = activeRadius;
+        shootRangeImgTrans.localScale = Vector3.one * (activeRadius * 2);
     }
 
     void Update()
@@ -69,6 +84,24 @@ public class Turret : MonoBehaviour
         this.enemyTrans = enemiesInRange.Peek().transform;
     }
 
+    public void SetInfo(TurretInfo turretInfo)
+    {
+        this.activeRadius = turretInfo.activeRadius;
+        this.activeRadius = turretInfo.activeRadius;
+    }
 
+    public void Init(TurretInfo turretInfo)
+    {
+        this._circleCollider2D.radius = turretInfo.activeRadius;
+        this.shootRangeImgTrans.localScale = Vector3.one * turretInfo.activeRadius * 2;
+        this.delayShoot = turretInfo.delayShoot;
+    }
+
+    public void EnableTurret(bool enable)
+    {
+        _circleCollider2D.enabled = enable;
+        gameObject.SetActive(enable);
+        _isActive = (enable);
+    }
 
 }

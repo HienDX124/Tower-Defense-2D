@@ -5,3 +5,10 @@
     Fire,
     Poison
 }
+
+public enum TurretTargetType
+{
+    Enemy,
+    Turret,
+    Troops,
+}

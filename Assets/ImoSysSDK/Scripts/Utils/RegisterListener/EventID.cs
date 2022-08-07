@@ -7,5 +7,5 @@ public enum EventID
     NextLevel,
     EnemyDie,
     UpdateCoin,
-    BuyTurret,
+    StartBuyTurret,
 }

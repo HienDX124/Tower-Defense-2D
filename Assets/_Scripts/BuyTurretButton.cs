@@ -21,6 +21,6 @@ public class BuyTurretButton : MonoBehaviour
 
     private void BuyButtonOnClick()
     {
-        EventDispatcher.Instance.PostEvent(EventID.BuyTurret, turretInfo);
+        EventDispatcher.Instance.PostEvent(EventID.StartBuyTurret, turretInfo);
     }
 }

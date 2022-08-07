@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,13 +19,13 @@ public class CommonFunctions : MonoBehaviour
         return positions;
     }
 
-    public static void EnableButton(Button button, bool enable)
+    public static void PlayOneShotASound(AudioSource audioSource, AudioClip audioClip) => audioSource.PlayOneShot(audioClip);
+
+    public static void EnableByCanvasGroup(CanvasGroup canvasGroup, bool enable, float delay = Const.PANEL_SLIDE_SPEED)
     {
-        button.interactable = enable;
+        if (enable) canvasGroup.DOFade(1f, delay);
+        else canvasGroup.DOFade(0f, delay);
+        canvasGroup.blocksRaycasts = enable;
     }
 
-    public static void PlayOneShotASound(AudioSource audioSource, AudioClip audioClip)
-    {
-        audioSource.PlayOneShot(audioClip);
-    }
 }

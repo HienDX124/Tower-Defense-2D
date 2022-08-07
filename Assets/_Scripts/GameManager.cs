@@ -33,7 +33,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         IncreaseCoins(e.coinReward);
     }
 
-    private void IncreaseCoins(int amount)
+    public void IncreaseCoins(int amount)
     {
         UserData.CoinsNumber += amount;
         EventDispatcher.Instance.PostEvent(EventID.UpdateCoin);
