@@ -6,8 +6,7 @@ public class Turret : MonoBehaviour
 {
     [SerializeField] private float delayShoot;
     private float currentDelayShoot;
-    private bool hasEnemyInRage;
-    private Transform enemyTrans;
+    // private Transform enemyTrans;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform muzzleTrans;
     [SerializeField] private Transform bodyTrans;
@@ -65,7 +64,6 @@ public class Turret : MonoBehaviour
         {
             Enemy e = other.gameObject.GetComponent<Enemy>();
             enemiesInRange.Enqueue(e);
-            hasEnemyInRage = true;
         }
     }
 
@@ -74,14 +72,7 @@ public class Turret : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             enemiesInRange.Dequeue();
-            SetEnemyTarget();
         }
-    }
-
-    private void SetEnemyTarget()
-    {
-        if (enemiesInRange.Count <= 0) return;
-        this.enemyTrans = enemiesInRange.Peek().transform;
     }
 
     public void SetInfo(TurretInfo turretInfo)
@@ -103,5 +94,4 @@ public class Turret : MonoBehaviour
         gameObject.SetActive(enable);
         _isActive = (enable);
     }
-
 }

@@ -7,7 +7,7 @@ public class BuyTurretButton : MonoBehaviour
 {
     [SerializeField] private Button button;
 
-    public TurretInfo turretInfo;
+    private TurretInfo turretInfo;
 
     private void OnEnable()
     {
@@ -17,6 +17,11 @@ public class BuyTurretButton : MonoBehaviour
     private void OnDisable()
     {
         button.onClick.RemoveListener(BuyButtonOnClick);
+    }
+
+    public void Init(TurretInfo turretInfo)
+    {
+        this.turretInfo = turretInfo;
     }
 
     private void BuyButtonOnClick()

@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(CanvasGroup))]
 public class TurretShop : SingletonMonobehaviour<TurretShop>
 {
     public List<TurretInfo> turretDataList;
@@ -24,16 +25,21 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
         base.Awake();
 
         buttonList = new List<BuyTurretButton>();
+        turretShopCvg = GetComponent<CanvasGroup>();
     }
 
     private void OnEnable()
     {
         EventDispatcher.Instance.RegisterListener(EventID.StartBuyTurret, SetupTurretInstance);
+        buildButton.onClick.AddListener(BuildButtonOnClick);
+        cancelButton.onClick.AddListener(CancelButtonOnClick);
     }
 
     private void OnDisable()
     {
         EventDispatcher.Instance.RemoveListener(EventID.StartBuyTurret, SetupTurretInstance);
+        buildButton.onClick.RemoveListener(BuildButtonOnClick);
+        cancelButton.onClick.RemoveListener(CancelButtonOnClick);
     }
 
     private void Start()
@@ -46,23 +52,41 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
         foreach (var ti in turretDataList)
         {
             BuyTurretButton button = Instantiate<BuyTurretButton>(buyTurretButtonPrefab, buttonContainer);
+            button.Init(ti);
             buttonList.Add(button);
         }
     }
 
     private void Update()
     {
+        if (
+            !isBuyingTurret
+            || CommonFunctions.MouseOnElement(buildButton.GetComponent<RectTransform>())
+            || CommonFunctions.MouseOnElement(cancelButton.GetComponent<RectTransform>())
+            ) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             UpdateTurretInstanceUIPos(Input.mousePosition);
         }
     }
 
+    private void EnableTurretInstance(bool enable)
+    {
+        turretInstance.gameObject.SetActive(enable);
+        CommonFunctions.EnableByCanvasGroup(turretInstanceCvg, enable);
+    }
+
     private void SetupTurretInstance(object param = null)
     {
+        isBuyingTurret = true;
+        EnableTurretInstance(true);
         turretInstanceInfo = (TurretInfo)param;
+        Debug.LogWarning("turretInstanceInfo != null: " + (turretInstanceInfo.activeRadius));
+
         turretInstance.Init(turretInstanceInfo);
         CommonFunctions.EnableByCanvasGroup(turretInstanceCvg, true);
+        CommonFunctions.EnableByCanvasGroup(turretShopCvg, false);
     }
 
     public void UpdateTurretInstanceUIPos(Vector3 mousePos)
@@ -78,11 +102,21 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
         int turretPrice = turretInstanceInfo.price;
         if (UserData.CoinsNumber < turretPrice) return;
 
-        CommonFunctions.EnableByCanvasGroup(turretInstanceCvg, false, 0f);
+        // CommonFunctions.EnableByCanvasGroup(turretInstanceCvg, false, 0f);
 
-        GameManager.instance.IncreaseCoins(turretPrice);
+        GameManager.instance.IncreaseCoins(turretPrice * -1);
 
         Turret newTurret = Instantiate<Turret>(turretPrefab, turretInstancePos, Quaternion.identity);
+        isBuyingTurret = false;
+
+        EnableTurretInstance(false);
     }
 
+    private void CancelButtonOnClick()
+    {
+        isBuyingTurret = false;
+
+        EnableTurretInstance(false);
+        CommonFunctions.EnableByCanvasGroup(turretShopCvg, true);
+    }
 }

@@ -676,6 +676,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretInstance
       objectReference: {fileID: 0}
+    - target: {fileID: 5091097347634151194, guid: ba0948e35ce55c34bb465bf5611c7767, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5091097347634151195, guid: ba0948e35ce55c34bb465bf5611c7767, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -907,14 +911,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894922829}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1072,7 +1076,7 @@ GameObject:
   - component: {fileID: 1082477652}
   - component: {fileID: 1082477651}
   m_Layer: 5
-  m_Name: BuyButton
+  m_Name: BuildButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1321,9 +1325,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326611464}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &1464738234
 GameObject:
@@ -2087,9 +2091,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807673533}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1807673539
 MonoBehaviour:
@@ -2118,8 +2122,9 @@ MonoBehaviour:
   buttonContainer: {fileID: 1636465731}
   turretInstanceCvg: {fileID: 1326611466}
   turretInstance: {fileID: 1131913814}
-  buildButton: {fileID: 0}
-  cancelButton: {fileID: 0}
+  turretPrefab: {fileID: 5091097347634151192, guid: ba0948e35ce55c34bb465bf5611c7767, type: 3}
+  buildButton: {fileID: 1082477651}
+  cancelButton: {fileID: 1788365160}
 --- !u!1 &2039910524
 GameObject:
   m_ObjectHideFlags: 0
