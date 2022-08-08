@@ -100,9 +100,7 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
     private void BuildButtonOnClick()
     {
         int turretPrice = turretInstanceInfo.price;
-        if (UserData.CoinsNumber < turretPrice) return;
-
-        // CommonFunctions.EnableByCanvasGroup(turretInstanceCvg, false, 0f);
+        if (GameManager.instance.levelCoins < turretPrice) return;
 
         GameManager.instance.IncreaseCoins(turretPrice * -1);
 

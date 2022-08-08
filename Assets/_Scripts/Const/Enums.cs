@@ -12,3 +12,9 @@ public enum TurretTargetType
     Turret,
     Troops,
 }
+
+public enum EnemyType
+{
+    Enemy1,
+    Enemy2,
+}

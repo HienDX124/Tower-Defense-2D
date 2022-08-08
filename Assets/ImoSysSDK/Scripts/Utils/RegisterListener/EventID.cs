@@ -8,4 +8,5 @@ public enum EventID
     EnemyDie,
     UpdateCoin,
     StartBuyTurret,
+    LoadLevel,
 }

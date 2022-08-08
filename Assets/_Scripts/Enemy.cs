@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -20,13 +21,14 @@ public class Enemy : MonoBehaviour
         this.movePath = movePath;
     }
 
-    public void StartMove()
+    public async UniTask StartMove(int delay)
     {
         List<Vector3> pathPointList = movePath;
         movingTween = this.transform.DOPath(pathPointList.ToArray(), 10f);
         movingTween.SetEase(Ease.Linear);
-
         this.transform.position = movePath[0];
+
+        await UniTask.Delay(delay);
         movingTween.Play();
     }
 

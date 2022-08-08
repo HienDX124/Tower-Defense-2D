@@ -31,7 +31,7 @@ public class GameplayUI : SingletonMonobehaviour<GameplayUI>
 
     private void UpdateCoinUI(object param = null)
     {
-        coinsText.text = "Coins: " + UserData.CoinsNumber.ToString();
+        coinsText.text = "Coins: " + GameManager.instance.levelCoins.ToString();
     }
 
     private void ShowTurretShop()

@@ -7,8 +7,6 @@ public class EnemyManager : SingletonMonobehaviour<EnemyManager>
 {
     [SerializeField] private Enemy[] enemyPrefabs;
     public List<Enemy> enemyList;
-    public int numOfEnemy;
-    [SerializeField] private int delayPerEnemy;
     [SerializeField] private float enemyHP;
     private List<Vector3> enemyMovePath;
     private void OnEnable()
@@ -20,11 +18,11 @@ public class EnemyManager : SingletonMonobehaviour<EnemyManager>
     {
         EventDispatcher.Instance.RemoveListener(EventID.EnemyDie, UpdateEnemyList);
     }
-    public void Init()
+    public void Init(int totalEnemy)
     {
         enemyMovePath = GameManager.instance.mainPathPoints;
         enemyList = new List<Enemy>();
-        _ = SpawnEnemies(numOfEnemy, delayPerEnemy);
+        SpawnEnemies(totalEnemy);
     }
 
     private Enemy SpawnEnemy(int id, Enemy enemyPrefab = null)
@@ -35,19 +33,33 @@ public class EnemyManager : SingletonMonobehaviour<EnemyManager>
         return e;
     }
 
-    public async UniTask SpawnEnemies(int amount, int delayPerSpawn)
+    public void SpawnEnemies(int amount, Enemy enemyPrefab = null)
     {
         for (int i = 0; i < amount; i++)
         {
-            Enemy e = SpawnEnemy(i);
-            e.StartMove();
+            Enemy e = SpawnEnemy(i, enemyPrefab);
             enemyList.Add(e);
-            await UniTask.Delay(delayPerSpawn);
         }
     }
 
     private void UpdateEnemyList(object param = null)
     {
         enemyList.Remove((Enemy)param);
+    }
+
+    public Enemy GetEnemy()
+    {
+        if (enemyList.Count == 0) return null;
+        Enemy enemyToGet = enemyList[enemyList.Count - 1];
+        enemyList.Remove(enemyToGet);
+        return enemyToGet;
+    }
+
+    public void EnemiesStartWave(int amountEnemyOfWave, int delayPerEnemy)
+    {
+        for (int i = 0; i < amountEnemyOfWave; i++)
+        {
+            _ = GetEnemy().StartMove(delayPerEnemy * i);
+        }
     }
 }

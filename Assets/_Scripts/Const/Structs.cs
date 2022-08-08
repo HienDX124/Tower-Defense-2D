@@ -18,5 +18,12 @@ public struct BulletInfo
 {
     public TurretType turretType;
     public float damage;
+}
 
+[System.Serializable]
+public struct WaveInfo
+{
+    public int numOfEnemyInWave;
+    public EnemyType enemyType;
+    public int delayPerEnemy;
 }
