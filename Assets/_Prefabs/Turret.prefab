@@ -394,6 +394,8 @@ MonoBehaviour:
   activeRadius: 1.5
   _circleCollider2D: {fileID: 5091097347634151193}
   shootRangeImgTrans: {fileID: 857563766}
+  bodyIcon: {fileID: 5091097347539200475}
+  barrelIcon: {fileID: 5091097347332345486}
 --- !u!58 &5091097347634151193
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class BuyTurretButton : MonoBehaviour
 {
     [SerializeField] private Button button;
-
+    [SerializeField] private Text turretNameText;
+    [SerializeField] private Text turretPriceText;
     private TurretInfo turretInfo;
 
     private void OnEnable()
@@ -22,6 +23,8 @@ public class BuyTurretButton : MonoBehaviour
     public void Init(TurretInfo turretInfo)
     {
         this.turretInfo = turretInfo;
+        turretNameText.text = turretInfo.turretName;
+        turretPriceText.text = turretInfo.price.ToString();
     }
 
     private void BuyButtonOnClick()

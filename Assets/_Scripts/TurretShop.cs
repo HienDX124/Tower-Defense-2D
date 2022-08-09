@@ -20,6 +20,7 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
     [SerializeField] private Button cancelButton;
     private bool isBuyingTurret;
     private Vector2 turretInstancePos;
+    [SerializeField] private Transform turretManagerTrans;
     protected override void Awake()
     {
         base.Awake();
@@ -82,7 +83,6 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
         isBuyingTurret = true;
         EnableTurretInstance(true);
         turretInstanceInfo = (TurretInfo)param;
-        Debug.LogWarning("turretInstanceInfo != null: " + (turretInstanceInfo.activeRadius));
 
         turretInstance.Init(turretInstanceInfo);
         CommonFunctions.EnableByCanvasGroup(turretInstanceCvg, true);
@@ -104,7 +104,9 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
 
         GameManager.instance.IncreaseCoins(turretPrice * -1);
 
-        Turret newTurret = Instantiate<Turret>(turretPrefab, turretInstancePos, Quaternion.identity);
+        Turret newTurret = Instantiate<Turret>(turretPrefab, turretInstancePos, Quaternion.identity, turretManagerTrans);
+        newTurret.Init(turretInstanceInfo);
+
         isBuyingTurret = false;
 
         EnableTurretInstance(false);

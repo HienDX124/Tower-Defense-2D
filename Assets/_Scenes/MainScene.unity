@@ -1979,8 +1979,20 @@ MonoBehaviour:
     activeRadius: 1.5
     delayShoot: 0.5
     targetType: 0
-    icon: {fileID: 0}
+    bodyIcon: {fileID: -2530774023603923335, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    barrelIcon: {fileID: -3990345764959194948, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
     price: 20
+    bulletInfo:
+      turretType: 0
+      damage: 2
+  - turretName: PoisonTurret
+    turretType: 3
+    activeRadius: 2
+    delayShoot: 1
+    targetType: 0
+    bodyIcon: {fileID: 668310319915538355, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    barrelIcon: {fileID: 8209262999808435703, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    price: 35
     bulletInfo:
       turretType: 0
       damage: 2
@@ -1991,6 +2003,37 @@ MonoBehaviour:
   turretPrefab: {fileID: 5091097347634151192, guid: ba0948e35ce55c34bb465bf5611c7767, type: 3}
   buildButton: {fileID: 1082477651}
   cancelButton: {fileID: 1788365160}
+  turretManagerTrans: {fileID: 1817402052}
+--- !u!1 &1817402051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1817402052}
+  m_Layer: 0
+  m_Name: TurretManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1817402052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817402051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 540, y: 960, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2039910524
 GameObject:
   m_ObjectHideFlags: 0

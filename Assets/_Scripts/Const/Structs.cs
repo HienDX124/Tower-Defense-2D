@@ -8,7 +8,8 @@ public struct TurretInfo
     public float activeRadius;
     public float delayShoot;
     public TurretTargetType targetType;
-    public GameObject icon;
+    public Sprite bodyIcon;
+    public Sprite barrelIcon;
     public int price;
     public BulletInfo bulletInfo;
 }

@@ -6,7 +6,6 @@ public class Turret : MonoBehaviour
 {
     [SerializeField] private float delayShoot;
     private float currentDelayShoot;
-    // private Transform enemyTrans;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform muzzleTrans;
     [SerializeField] private Transform bodyTrans;
@@ -15,6 +14,9 @@ public class Turret : MonoBehaviour
     private Queue<Enemy> enemiesInRange;
     [SerializeField] private Transform shootRangeImgTrans;
     private bool _isActive;
+    [SerializeField] private SpriteRenderer bodyIcon;
+    [SerializeField] private SpriteRenderer barrelIcon;
+
     private void Awake()
     {
         enemiesInRange = new Queue<Enemy>();
@@ -75,17 +77,13 @@ public class Turret : MonoBehaviour
         }
     }
 
-    public void SetInfo(TurretInfo turretInfo)
-    {
-        this.activeRadius = turretInfo.activeRadius;
-        this.activeRadius = turretInfo.activeRadius;
-    }
-
     public void Init(TurretInfo turretInfo)
     {
         this._circleCollider2D.radius = turretInfo.activeRadius;
         this.shootRangeImgTrans.localScale = Vector3.one * turretInfo.activeRadius * 2;
         this.delayShoot = turretInfo.delayShoot;
+        this.bodyIcon.sprite = turretInfo.bodyIcon;
+        this.barrelIcon.sprite = turretInfo.barrelIcon;
     }
 
     public void EnableTurret(bool enable)
