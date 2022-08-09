@@ -22,7 +22,7 @@ public class EnemyManager : SingletonMonobehaviour<EnemyManager>
     {
         enemyMovePath = GameManager.instance.mainPathPoints;
         enemyList = new List<Enemy>();
-        SpawnEnemies(totalEnemy);
+        // SpawnEnemies(totalEnemy);
     }
 
     private Enemy SpawnEnemy(int id, Enemy enemyPrefab = null)
@@ -57,6 +57,8 @@ public class EnemyManager : SingletonMonobehaviour<EnemyManager>
 
     public void EnemiesStartWave(int amountEnemyOfWave, int delayPerEnemy)
     {
+        SpawnEnemies(amountEnemyOfWave);
+
         for (int i = 0; i < amountEnemyOfWave; i++)
         {
             _ = GetEnemy().StartMove(delayPerEnemy * i);

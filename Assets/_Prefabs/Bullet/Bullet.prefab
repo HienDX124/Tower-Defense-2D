@@ -177,4 +177,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxRange: 20
   forceIntensity: 300
-  damageCause: 2
+  bulletInfo:
+    turretType: 0
+    damage: 2

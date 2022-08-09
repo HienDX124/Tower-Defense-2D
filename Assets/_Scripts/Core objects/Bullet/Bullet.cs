@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float maxRange;
     [SerializeField] private float forceIntensity;
     private Tween movingTween;
-    [SerializeField] private float damageCause;
+    [SerializeField] private BulletInfo bulletInfo;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Enemy e = other.gameObject.GetComponent<Enemy>();
-            e.TakeDamage(damageCause);
+            e.TakeDamage(bulletInfo.damage);
             Explode();
         }
     }

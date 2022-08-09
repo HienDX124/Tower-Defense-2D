@@ -19,6 +19,7 @@ public struct BulletInfo
 {
     public TurretType turretType;
     public float damage;
+    public Bullet bulletPrefab;
 }
 
 [System.Serializable]

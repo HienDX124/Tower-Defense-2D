@@ -1088,6 +1088,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1104002992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1104002993}
+  m_Layer: 0
+  m_Name: BulletManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1104002993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104002992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.5465739, y: 5.253352, z: -14.112463}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1131913814 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5091097347634151192, guid: ba0948e35ce55c34bb465bf5611c7767, type: 3}
@@ -1994,7 +2024,7 @@ MonoBehaviour:
     barrelIcon: {fileID: 8209262999808435703, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
     price: 35
     bulletInfo:
-      turretType: 0
+      turretType: 3
       damage: 2
   buyTurretButtonPrefab: {fileID: 620591075405164622, guid: f375c25bd9407e9408cbb1a6e7d901a3, type: 3}
   buttonContainer: {fileID: 1636465731}

@@ -16,6 +16,7 @@ public class Turret : MonoBehaviour
     private bool _isActive;
     [SerializeField] private SpriteRenderer bodyIcon;
     [SerializeField] private SpriteRenderer barrelIcon;
+    private TurretType type;
 
     private void Awake()
     {
@@ -55,6 +56,7 @@ public class Turret : MonoBehaviour
 
     private void Shoot(Vector2 direction)
     {
+        Bullet bulletToShoot = BulletManager.instance.GetBulletInfo(BulletManager.instance.GetBulletInfo(type));
         Bullet b = Instantiate(bulletPrefab, muzzleTrans.position, Quaternion.identity);
         b.transform.SetParent(this.transform);
         b.ShootTo(direction);
@@ -84,6 +86,7 @@ public class Turret : MonoBehaviour
         this.delayShoot = turretInfo.delayShoot;
         this.bodyIcon.sprite = turretInfo.bodyIcon;
         this.barrelIcon.sprite = turretInfo.barrelIcon;
+        this.type = turretInfo.turretType;
     }
 
     public void EnableTurret(bool enable)
