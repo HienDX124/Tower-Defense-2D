@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78250039b4a87484888255db7ca52c99, type: 3}
+  m_Name: Bullet data
+  m_EditorClassIdentifier: 
+  bulletInfos:
+  - turretType: 0
+    damage: 2
+    bulletPrefab: {fileID: 3867336847398557371, guid: 181219cebe43add4e809a0f5d36e0ea7, type: 3}
+  - turretType: 1
+    damage: 0.5
+    bulletPrefab: {fileID: 6691469191937805485, guid: ac97e7d8eb696c947a608374c0e5917d, type: 3}
+  - turretType: 2
+    damage: 1
+    bulletPrefab: {fileID: 7987995164739960131, guid: 7f75196e81e6ac2458078e608f0a6e3e, type: 3}
+  - turretType: 3
+    damage: 1
+    bulletPrefab: {fileID: 3046523335872001612, guid: 66cb94b3cbc4b784b8348c961ea238fe, type: 3}

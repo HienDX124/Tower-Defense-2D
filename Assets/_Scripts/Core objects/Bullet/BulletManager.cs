@@ -6,6 +6,7 @@ public class BulletManager : SingletonMonobehaviour<BulletManager>
 {
     [SerializeField] private BulletDataSO bulletDataSO;
     public List<BulletInfo> bulletInfoList => bulletDataSO.bulletInfos;
+    [SerializeField] private BulletInfo bulletInfoDefault;
 
     public BulletInfo GetBulletInfo(TurretType turretType)
     {
@@ -13,13 +14,7 @@ public class BulletManager : SingletonMonobehaviour<BulletManager>
         {
             if (bulletInfo.turretType == turretType) return bulletInfo;
         }
-        return bulletInfoList[0];
+        return bulletInfoDefault;
     }
-
 }
 
-[CreateAssetMenu(fileName = "Bullet data", menuName = "Scriptable objects/BulletData")]
-public class BulletDataSO : ScriptableObject
-{
-    public List<BulletInfo> bulletInfos;
-}

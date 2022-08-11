@@ -100,19 +100,7 @@ MonoBehaviour:
   startCoins: 50
   delayPerWave: 7000
   waveInfos:
-  - numOfEnemyInWave: 5
-    enemyType: 0
-    delayPerEnemy: 1000
-  - numOfEnemyInWave: 5
-    enemyType: 0
-    delayPerEnemy: 1000
-  - numOfEnemyInWave: 5
-    enemyType: 0
-    delayPerEnemy: 1000
-  - numOfEnemyInWave: 5
-    enemyType: 0
-    delayPerEnemy: 1000
-  - numOfEnemyInWave: 5
+  - numOfEnemyInWave: 1
     enemyType: 0
     delayPerEnemy: 1000
 --- !u!1 &768210982057491182

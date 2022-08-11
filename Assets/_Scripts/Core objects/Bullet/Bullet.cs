@@ -10,16 +10,23 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float forceIntensity;
     private Tween movingTween;
     [SerializeField] private BulletInfo bulletInfo;
+    [SerializeField] private Collider2D _collider2D;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
     }
 
+    public void Init(BulletInfo info)
+    {
+        this.bulletInfo = info;
+    }
+
     public void ShootTo(Vector2 dir)
     {
         rigid.AddForce(forceIntensity * (dir));
-        Destroy(this.gameObject, 3f);
+        Destroy(this.gameObject, 10f);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -32,8 +39,10 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void Explode()
+    private void Explode()
     {
-        Destroy(this.gameObject);
+        //  Play FX explode
+        _collider2D.enabled = false;
+        spriteRenderer.enabled = false;
     }
 }

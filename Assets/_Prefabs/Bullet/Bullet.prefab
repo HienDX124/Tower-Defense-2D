@@ -180,3 +180,6 @@ MonoBehaviour:
   bulletInfo:
     turretType: 0
     damage: 2
+    bulletPrefab: {fileID: 0}
+  _collider2D: {fileID: 3867336847398557368}
+  spriteRenderer: {fileID: 3867336847161629919}

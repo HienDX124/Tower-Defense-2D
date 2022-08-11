@@ -7,6 +7,7 @@ public class PoisonEffect : MonoBehaviour
 {
     [SerializeField] private int poisonDur;
     [SerializeField] private float damageEachTime;
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
@@ -18,13 +19,13 @@ public class PoisonEffect : MonoBehaviour
 
     private IEnumerator CauseDamagePoison(Enemy enemy)
     {
+        Debug.LogWarning("CauseDamagePoison");
         do
         {
             Debug.LogWarning("Damage poison");
             yield return ExtensionClass.GetWaitForSeconds(1f);
-            enemy.TakeDamage(damageEachTime);
-            poisonDur -= 1;
-        } while (poisonDur <= 0);
+            if (enemy) enemy.TakeDamage(damageEachTime);
+            poisonDur--;
+        } while (poisonDur > 0);
     }
-
 }

@@ -6,7 +6,6 @@ public class Turret : MonoBehaviour
 {
     [SerializeField] private float delayShoot;
     private float currentDelayShoot;
-    [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform muzzleTrans;
     [SerializeField] private Transform bodyTrans;
     [SerializeField] private float activeRadius;
@@ -56,8 +55,9 @@ public class Turret : MonoBehaviour
 
     private void Shoot(Vector2 direction)
     {
-        Bullet bulletToShoot = BulletManager.instance.GetBulletInfo(BulletManager.instance.GetBulletInfo(type));
-        Bullet b = Instantiate(bulletPrefab, muzzleTrans.position, Quaternion.identity);
+        BulletInfo bulletToShoot = BulletManager.instance.GetBulletInfo(type);
+        Bullet b = Instantiate(bulletToShoot.bulletPrefab, muzzleTrans.position, Quaternion.identity);
+        b.Init(bulletToShoot);
         b.transform.SetParent(this.transform);
         b.ShootTo(direction);
     }
