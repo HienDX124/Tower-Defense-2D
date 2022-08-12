@@ -13,4 +13,10 @@ public class FireEffect : BulletEffectBase
     {
         enemyTarget.GetFireEffect();
     }
+
+    protected override void OnCollisionEnter2D(Collision2D other)
+    {
+
+    }
+
 }

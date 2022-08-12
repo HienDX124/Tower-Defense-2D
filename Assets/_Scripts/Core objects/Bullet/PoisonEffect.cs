@@ -10,12 +10,18 @@ public class PoisonEffect : BulletEffectBase
 
     protected override void CauseEffect(Enemy enemyTarget)
     {
+        Debug.LogWarning("Cause effect poison");
         StartCoroutine(CausePoisonEffect(enemyTarget));
     }
 
     protected override void OnCollisionEnter2D(Collision2D other)
     {
-
+        Debug.LogWarning(this.name + " collide with " + other.gameObject.name);
+        if (other.gameObject.tag == "Enemy")
+        {
+            Enemy e = other.gameObject.GetComponent<Enemy>();
+            CauseEffect(e);
+        }
     }
 
     private IEnumerator CausePoisonEffect(Enemy enemyTarget)

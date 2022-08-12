@@ -13,14 +13,7 @@ public abstract class BulletEffectBase : MonoBehaviour
         bulletComponent = GetComponent<Bullet>();
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            Enemy e = other.gameObject.GetComponent<Enemy>();
-            CauseEffect(e);
-        }
-    }
+    protected abstract void OnCollisionEnter2D(Collision2D other);
 
     protected abstract void CauseEffect(Enemy enemyTarget);
 

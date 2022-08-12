@@ -5,12 +5,12 @@ using UnityEngine;
 public class BulletManager : SingletonMonobehaviour<BulletManager>
 {
     [SerializeField] private BulletDataSO bulletDataSO;
-    public List<BulletInfo> bulletInfoList => bulletDataSO.bulletInfoList;
+    public BulletInfo[] bulletInfos => bulletDataSO.BulletInfos;
     [SerializeField] private BulletInfo bulletInfoDefault;
 
     public BulletInfo GetBulletInfo(TurretType turretType)
     {
-        foreach (BulletInfo bulletInfo in bulletInfoList)
+        foreach (BulletInfo bulletInfo in bulletInfos)
         {
             if (bulletInfo.turretType == turretType) return bulletInfo;
         }
