@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletManager : SingletonMonobehaviour<BulletManager>
 {
     [SerializeField] private BulletDataSO bulletDataSO;
-    public List<BulletInfo> bulletInfoList => bulletDataSO.bulletInfos;
+    public List<BulletInfo> bulletInfoList => bulletDataSO.bulletInfoList;
     [SerializeField] private BulletInfo bulletInfoDefault;
 
     public BulletInfo GetBulletInfo(TurretType turretType)

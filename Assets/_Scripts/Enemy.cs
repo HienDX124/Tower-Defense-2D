@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     public int enemyID;
     [SerializeField] private HPBar hPBar;
     public int coinReward;
+    private bool onFireEffect;
+
     public void Init(float hp, int ID, List<Vector3> movePath)
     {
         this.hpOrigin = hp;
@@ -34,6 +36,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if (onFireEffect) amount *= 2;
         UpdateHP(-amount);
         hPBar.UpdateHP(currentHP, hpOrigin);
         if (currentHP <= 0)
@@ -45,16 +48,18 @@ public class Enemy : MonoBehaviour
         this.currentHP += amount;
     }
 
-    private void RecoverHP(float amount)
-    {
-        UpdateHP(amount);
-    }
+    private void RecoverHP(float amount) => UpdateHP(amount);
 
     public void Death()
     {
         movingTween.Kill();
         Destroy(this.gameObject);
         EventDispatcher.Instance.PostEvent(EventID.EnemyDie, this);
+    }
+
+    public void GetFireEffect()
+    {
+        onFireEffect = true;
     }
 
 }
