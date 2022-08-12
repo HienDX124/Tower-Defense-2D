@@ -5,8 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Bullet))]
 public class PoisonEffect : MonoBehaviour
 {
-    [SerializeField] private int poisonDur;
-    [SerializeField] private float damageEachTime;
+    [SerializeField] private float totalPoisonDur;
+    [SerializeField] private float totalDamage;
+    [SerializeField] private float timeStep;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -23,9 +24,9 @@ public class PoisonEffect : MonoBehaviour
         do
         {
             Debug.LogWarning("Damage poison");
-            yield return ExtensionClass.GetWaitForSeconds(1f);
-            if (enemy) enemy.TakeDamage(damageEachTime);
-            poisonDur--;
-        } while (poisonDur > 0);
+            yield return ExtensionClass.GetWaitForSeconds(timeStep);
+            if (enemy) enemy.TakeDamage(totalDamage * (timeStep / totalPoisonDur));
+            totalPoisonDur -= timeStep;
+        } while (totalPoisonDur > 0);
     }
 }
