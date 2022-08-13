@@ -426,7 +426,7 @@ MonoBehaviour:
   shootRangeImgTrans: {fileID: 857563766}
   bodyIcon: {fileID: 5091097347539200475}
   barrelIcon: {fileID: 5091097347332345486}
-  effectContainerTrans: {fileID: 8433799175677395414}
+  _effectContainerTrans: {fileID: 8433799175677395414}
 --- !u!58 &5091097347634151193
 CircleCollider2D:
   m_ObjectHideFlags: 0
