@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
 
-    [SerializeField] private PathCreator mainPath;
+    private PathCreator mainPath;
     [SerializeField] private Transform levelRootTrans;
     [SerializeField] private LevelInfo[] levelInfoPrefabs;
     private int _levelCoins;
@@ -16,6 +16,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         base.Awake();
     }
+
     private void OnEnable()
     {
         EventDispatcher.Instance.RegisterListener(EventID.EnemyDie, HandleEnemyDie);
@@ -24,11 +25,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private void OnDisable()
     {
         EventDispatcher.Instance.RemoveListener(EventID.EnemyDie, HandleEnemyDie);
-    }
-
-    private void Start()
-    {
-        LoadLevel();
     }
 
     private void Update()
@@ -53,7 +49,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public void LoadLevel()
     {
         if (levelRootTrans.childCount > 0) Destroy(levelRootTrans.GetChild(0));
+
         currentLevelInfo = Instantiate<LevelInfo>(levelInfoPrefabs.PickRandom(), levelRootTrans);
+
         mainPath = currentLevelInfo.mainPath;
         int totalEnemy = 0;
         foreach (WaveInfo waveInfo in currentLevelInfo.waveInfos)

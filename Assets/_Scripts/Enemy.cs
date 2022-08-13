@@ -82,12 +82,4 @@ public class Enemy : MonoBehaviour
             .OnComplete(() => enemyIcon.color = Color.white)
             .Play();
     }
-
-    // private void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     if (other.gameObject.tag == "IceRegion")
-    //     {
-    //         _ = this.GetIceEffect(0.2f, 2f);
-    //     }
-    // }
 }
