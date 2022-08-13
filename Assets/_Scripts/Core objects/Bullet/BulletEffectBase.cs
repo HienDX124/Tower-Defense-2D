@@ -5,16 +5,26 @@ using UnityEngine;
 [RequireComponent(typeof(Bullet))]
 public abstract class BulletEffectBase : MonoBehaviour
 {
-    [SerializeField] protected float totalPoisonDur;
+    [SerializeField] protected float totalEffectDur;
     protected Bullet bulletComponent;
+    [SerializeField] protected TurretType effectType;
 
     private void Awake()
     {
         bulletComponent = GetComponent<Bullet>();
     }
 
-    protected abstract void OnCollisionEnter2D(Collision2D other);
+    protected virtual void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            CauseEffect(enemy);
+        }
+    }
 
-    protected abstract void CauseEffect(Enemy enemyTarget);
-
+    protected virtual void CauseEffect(Enemy enemyTarget)
+    {
+        enemyTarget.ShowEffect(totalEffectDur, effectType);
+    }
 }

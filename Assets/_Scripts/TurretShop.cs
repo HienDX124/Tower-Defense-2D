@@ -7,13 +7,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CanvasGroup))]
 public class TurretShop : SingletonMonobehaviour<TurretShop>
 {
-    public List<TurretInfo> turretDataList;
+    private TurretInfo[] turretData => TurretManager.instance.turretInfos;
     private List<BuyTurretButton> buttonList;
     [SerializeField] private BuyTurretButton buyTurretButtonPrefab;
     [SerializeField] private Transform buttonContainer;
     [SerializeField] private CanvasGroup turretInstanceCvg;
-    [SerializeField] private Turret turretInstance;
-    [SerializeField] private Turret turretPrefab;
+    [SerializeField] private TurretBase turretInstance;
+    [SerializeField] private TurretBase turretPrefab;
     private TurretInfo turretInstanceInfo;
     private CanvasGroup turretShopCvg;
     [SerializeField] private Button buildButton;
@@ -21,6 +21,7 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
     private bool isBuyingTurret;
     private Vector2 turretInstancePos;
     [SerializeField] private Transform turretManagerTrans;
+
     protected override void Awake()
     {
         base.Awake();
@@ -50,7 +51,7 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
 
     public void Init()
     {
-        foreach (var ti in turretDataList)
+        foreach (var ti in turretData)
         {
             BuyTurretButton button = Instantiate<BuyTurretButton>(buyTurretButtonPrefab, buttonContainer);
             button.Init(ti);
@@ -104,7 +105,7 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
 
         GameManager.instance.IncreaseCoins(turretPrice * -1);
 
-        Turret newTurret = Instantiate<Turret>(turretPrefab, turretInstancePos, Quaternion.identity, turretManagerTrans);
+        TurretBase newTurret = Instantiate<TurretBase>(turretPrefab, turretInstancePos, Quaternion.identity, turretManagerTrans);
         newTurret.Init(turretInstanceInfo);
 
         isBuyingTurret = false;

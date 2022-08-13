@@ -11,12 +11,7 @@ public class FireEffect : BulletEffectBase
 
     private void CauseFireEffect(Enemy enemyTarget)
     {
-        enemyTarget.GetFireEffect();
+        base.CauseEffect(enemyTarget);
+        _ = enemyTarget.GetFireEffect(totalEffectDur);
     }
-
-    protected override void OnCollisionEnter2D(Collision2D other)
-    {
-
-    }
-
 }

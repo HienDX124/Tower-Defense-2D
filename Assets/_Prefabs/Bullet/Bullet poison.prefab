@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f00fd6a0fd399704492579df742f5f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalPoisonDur: 3
+  totalEffectDur: 5
+  effectType: 3
   totalDamage: 3
-  timeStep: 0.2
+  timeStep: 0.3

@@ -15,7 +15,4 @@ public class TurretDataSO : ScriptableObject
             turretInfos[i].turretName = turretInfos[i].turretType.ToString();
         }
     }
-
-
-
 }

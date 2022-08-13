@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private HPBar hPBar;
     public int coinReward;
     private bool onFireEffect;
+    [SerializeField] private SpriteRenderer enemyIcon;
 
     public void Init(float hp, int ID, List<Vector3> movePath)
     {
@@ -38,15 +39,13 @@ public class Enemy : MonoBehaviour
     {
         if (onFireEffect) amount *= 2;
         UpdateHP(-amount);
+        FloatingTextManager.instance.ShowUpdateHP((-amount).ToString(), this.transform.position);
         hPBar.UpdateHP(currentHP, hpOrigin);
         if (currentHP <= 0)
             Death();
     }
 
-    private void UpdateHP(float amount)
-    {
-        this.currentHP += amount;
-    }
+    private void UpdateHP(float amount) => this.currentHP += amount;
 
     private void RecoverHP(float amount) => UpdateHP(amount);
 
@@ -57,9 +56,19 @@ public class Enemy : MonoBehaviour
         EventDispatcher.Instance.PostEvent(EventID.EnemyDie, this);
     }
 
-    public void GetFireEffect()
+    public async UniTask GetFireEffect(float effectDur)
     {
         onFireEffect = true;
+        await UniTask.Delay((int)(effectDur * 1000));
+        onFireEffect = false;
     }
 
+    public void ShowEffect(float duration, TurretType effectType)
+    {
+        Color color = BulletManager.instance.GetEffectColor(effectType);
+        this.enemyIcon.DOColor(color, duration / 5)
+            .SetLoops(5, LoopType.Yoyo)
+            .OnComplete(() => enemyIcon.color = Color.white)
+            .Play();
+    }
 }

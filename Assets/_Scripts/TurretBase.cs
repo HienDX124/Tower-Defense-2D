@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class TurretBase : MonoBehaviour
 {
     [SerializeField] private float delayShoot;
     private float currentDelayShoot;
@@ -16,13 +16,14 @@ public class Turret : MonoBehaviour
     [SerializeField] private SpriteRenderer bodyIcon;
     [SerializeField] private SpriteRenderer barrelIcon;
     private TurretType type;
+    [SerializeField] private Transform effectContainerTrans;
 
     private void Awake()
     {
         enemiesInRange = new Queue<Enemy>();
     }
 
-    void Start()
+    private void Start()
     {
         currentDelayShoot = delayShoot;
     }
@@ -34,7 +35,7 @@ public class Turret : MonoBehaviour
         shootRangeImgTrans.localScale = Vector3.one * (activeRadius * 2);
     }
 
-    void Update()
+    private void Update()
     {
         if (enemiesInRange.Count <= 0) return;
 
@@ -59,7 +60,7 @@ public class Turret : MonoBehaviour
         Bullet b = Instantiate(bulletToShoot.bulletPrefab, muzzleTrans.position, Quaternion.identity);
         b.Init(bulletToShoot);
         b.transform.SetParent(this.transform);
-        b.ShootTo(direction);
+        b.ShootTo(direction, this);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

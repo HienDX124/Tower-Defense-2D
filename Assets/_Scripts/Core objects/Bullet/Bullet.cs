@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private BulletInfo bulletInfo;
     [SerializeField] private Collider2D _collider2D;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    private TurretBase _turret;
+    public TurretBase turret => _turret;
 
     private void Awake()
     {
@@ -23,10 +25,11 @@ public class Bullet : MonoBehaviour
         this.bulletInfo = info;
     }
 
-    public void ShootTo(Vector2 dir)
+    public void ShootTo(Vector2 dir, TurretBase turret)
     {
         rigid.AddForce(forceIntensity * (dir));
         Destroy(this.gameObject, 10f);
+        this._turret = turret;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

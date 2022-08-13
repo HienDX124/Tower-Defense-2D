@@ -6,5 +6,5 @@ using UnityEngine;
 public class BulletDataSO : ScriptableObject
 {
     [SerializeField] private BulletInfo[] bulletInfos;
-    public BulletInfo[] BulletInfos;
+    public BulletInfo[] BulletInfos => bulletInfos;
 }

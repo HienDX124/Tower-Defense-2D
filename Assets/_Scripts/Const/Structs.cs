@@ -20,6 +20,7 @@ public struct BulletInfo
     public TurretType turretType;
     public float damage;
     public Bullet bulletPrefab;
+    public Color effectColor;
 }
 
 [System.Serializable]

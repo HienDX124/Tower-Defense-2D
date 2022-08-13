@@ -12,4 +12,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa3ce8c71d68a745b796d748086e09f, type: 3}
   m_Name: Turret data
   m_EditorClassIdentifier: 
-  turretInfoList: []
+  turretInfos:
+  - turretName: Normal
+    turretType: 0
+    activeRadius: 2
+    delayShoot: 0.5
+    targetType: 0
+    bodyIcon: {fileID: -2530774023603923335, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    barrelIcon: {fileID: -3990345764959194948, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    price: 20
+    bulletInfo:
+      turretType: 0
+      damage: 2
+      bulletPrefab: {fileID: 3867336847398557371, guid: 181219cebe43add4e809a0f5d36e0ea7, type: 3}
+  - turretName: Poison
+    turretType: 3
+    activeRadius: 3
+    delayShoot: 0.8
+    targetType: 0
+    bodyIcon: {fileID: 668310319915538355, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    barrelIcon: {fileID: 8209262999808435703, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    price: 35
+    bulletInfo:
+      turretType: 3
+      damage: 1
+      bulletPrefab: {fileID: 3046523335872001612, guid: 66cb94b3cbc4b784b8348c961ea238fe, type: 3}
+  - turretName: Fire
+    turretType: 2
+    activeRadius: 1.5
+    delayShoot: 0.8
+    targetType: 0
+    bodyIcon: {fileID: 8689031578505941573, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    barrelIcon: {fileID: -516494497013584593, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    price: 40
+    bulletInfo:
+      turretType: 2
+      damage: 0.5
+      bulletPrefab: {fileID: 7987995164739960131, guid: 7f75196e81e6ac2458078e608f0a6e3e, type: 3}
+  - turretName: Ice
+    turretType: 1
+    activeRadius: 1.2
+    delayShoot: 1
+    targetType: 0
+    bodyIcon: {fileID: -5429362649178149513, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    barrelIcon: {fileID: 3662653880640009175, guid: 1c1ad1aa3f81c3144acdc55069a03ef8, type: 3}
+    price: 35
+    bulletInfo:
+      turretType: 1
+      damage: 0.5
+      bulletPrefab: {fileID: 6691469191937805485, guid: ac97e7d8eb696c947a608374c0e5917d, type: 3}

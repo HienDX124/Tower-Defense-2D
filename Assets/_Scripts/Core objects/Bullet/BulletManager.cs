@@ -16,5 +16,14 @@ public class BulletManager : SingletonMonobehaviour<BulletManager>
         }
         return bulletInfoDefault;
     }
+
+    public Color GetEffectColor(TurretType type)
+    {
+        foreach (BulletInfo bulletInfo in bulletInfos)
+        {
+            if (bulletInfo.turretType == type) return bulletInfo.effectColor;
+        }
+        return bulletInfoDefault.effectColor;
+    }
 }
 

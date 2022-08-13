@@ -180,6 +180,7 @@ MonoBehaviour:
   enemyID: 0
   hPBar: {fileID: 6171885267411044825}
   coinReward: 5
+  enemyIcon: {fileID: 3503640566330392269}
 --- !u!210 &3503640566561025558
 SortingGroup:
   m_ObjectHideFlags: 0
