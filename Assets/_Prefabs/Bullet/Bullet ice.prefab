@@ -89,5 +89,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72e507affbcf6147b367014cea3511f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalEffectDur: 5
-  effectType: 2
+  totalEffectDur: 2
+  effectType: 1
+  iceRegionPrefab: {fileID: 7827074176321320560, guid: c5671c171859ee44d9ec3911ff3bf023, type: 3}
+  slowRate: 0.2
+  maxRangeRadius: 1
+  showDur: 0.2
+  disappearDur: 0.1

@@ -16,7 +16,8 @@ public class TurretBase : MonoBehaviour
     [SerializeField] private SpriteRenderer bodyIcon;
     [SerializeField] private SpriteRenderer barrelIcon;
     private TurretType type;
-    [SerializeField] private Transform effectContainerTrans;
+    [SerializeField] private Transform _effectContainerTrans;
+    public Transform effectContainerTrans => _effectContainerTrans;
 
     private void Awake()
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private List<Vector3> movePath;
-    private Tween movingTween;
+    private Sequence movingSequence;
     private float currentHP;
     private float hpOrigin;
     public int enemyID;
@@ -15,6 +15,11 @@ public class Enemy : MonoBehaviour
     public int coinReward;
     private bool onFireEffect;
     [SerializeField] private SpriteRenderer enemyIcon;
+
+    private void Awake()
+    {
+        movingSequence = DOTween.Sequence();
+    }
 
     public void Init(float hp, int ID, List<Vector3> movePath)
     {
@@ -27,12 +32,11 @@ public class Enemy : MonoBehaviour
     public async UniTask StartMove(int delay)
     {
         List<Vector3> pathPointList = movePath;
-        movingTween = this.transform.DOPath(pathPointList.ToArray(), 10f);
-        movingTween.SetEase(Ease.Linear);
+        movingSequence.Append(this.transform.DOPath(pathPointList.ToArray(), 10f));
+        movingSequence.SetEase(Ease.Linear);
         this.transform.position = movePath[0];
-
         await UniTask.Delay(delay);
-        movingTween.Play();
+        movingSequence.Play();
     }
 
     public void TakeDamage(float amount)
@@ -51,7 +55,7 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
-        movingTween.Kill();
+        movingSequence.Kill();
         Destroy(this.gameObject);
         EventDispatcher.Instance.PostEvent(EventID.EnemyDie, this);
     }
@@ -63,6 +67,13 @@ public class Enemy : MonoBehaviour
         onFireEffect = false;
     }
 
+    public async UniTask GetIceEffect(float slowRate, float slowDur)
+    {
+        movingSequence.timeScale = slowRate;
+        await UniTask.Delay((int)(slowDur * 1000));
+        movingSequence.timeScale = 1f;
+    }
+
     public void ShowEffect(float duration, TurretType effectType)
     {
         Color color = BulletManager.instance.GetEffectColor(effectType);
@@ -71,4 +82,12 @@ public class Enemy : MonoBehaviour
             .OnComplete(() => enemyIcon.color = Color.white)
             .Play();
     }
+
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject.tag == "IceRegion")
+    //     {
+    //         _ = this.GetIceEffect(0.2f, 2f);
+    //     }
+    // }
 }

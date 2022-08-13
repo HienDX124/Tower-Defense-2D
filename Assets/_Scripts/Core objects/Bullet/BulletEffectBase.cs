@@ -9,6 +9,9 @@ public abstract class BulletEffectBase : MonoBehaviour
     protected Bullet bulletComponent;
     [SerializeField] protected TurretType effectType;
 
+    ///<summary>Position that bullet collide with enemy</summary>
+    protected Vector2 collidePos;
+
     private void Awake()
     {
         bulletComponent = GetComponent<Bullet>();
@@ -19,6 +22,7 @@ public abstract class BulletEffectBase : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            collidePos = other.GetContact(0).point;
             CauseEffect(enemy);
         }
     }
