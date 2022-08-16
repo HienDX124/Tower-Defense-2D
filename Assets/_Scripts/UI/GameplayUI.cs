@@ -9,24 +9,38 @@ public class GameplayUI : SingletonMonobehaviour<GameplayUI>
     [SerializeField] private Text coinsText;
     [SerializeField] private CanvasGroup turretShopCvg;
     [SerializeField] private Button turretShopBtn;
-    [SerializeField] private Button closeTurretShopBtn;
+    [SerializeField] private Button startSpawnEnemyButton;
+
     private void OnEnable()
     {
         EventDispatcher.Instance.RegisterListener(EventID.UpdateCoin, UpdateCoinUI);
+        EventDispatcher.Instance.RegisterListener(EventID.LoadLevel, HandleLoadLevelEvent);
         turretShopBtn.onClick.AddListener(ShowTurretShop);
-        closeTurretShopBtn.onClick.AddListener(HideTurretShop);
+        startSpawnEnemyButton.onClick.AddListener(StartSpawnEnemyButtonOnClick);
     }
 
     private void OnDisable()
     {
         EventDispatcher.Instance.RemoveListener(EventID.UpdateCoin, UpdateCoinUI);
+        EventDispatcher.Instance.RemoveListener(EventID.LoadLevel, HandleLoadLevelEvent);
         turretShopBtn.onClick.RemoveListener(ShowTurretShop);
-        closeTurretShopBtn.onClick.RemoveListener(HideTurretShop);
+        startSpawnEnemyButton.onClick.RemoveListener(StartSpawnEnemyButtonOnClick);
     }
 
     private void Start()
     {
         UpdateCoinUI();
+    }
+
+    private void StartSpawnEnemyButtonOnClick()
+    {
+        _ = GameManager.instance.StartPlay();
+        startSpawnEnemyButton.GetComponent<CanvasGroup>().alpha = 0f;
+    }
+
+    private void HandleLoadLevelEvent(object param = null)
+    {
+        startSpawnEnemyButton.GetComponent<CanvasGroup>().alpha = 1f;
     }
 
     private void UpdateCoinUI(object param = null)

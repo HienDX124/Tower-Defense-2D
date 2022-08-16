@@ -15,7 +15,6 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
     [SerializeField] private TurretBase turretInstance;
     [SerializeField] private TurretBase turretPrefab;
     private TurretInfo turretInstanceInfo;
-    private CanvasGroup turretShopCvg;
     [SerializeField] private Button buildButton;
     [SerializeField] private Button cancelButton;
     private bool isBuyingTurret;
@@ -27,7 +26,6 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
         base.Awake();
 
         buttonList = new List<BuyTurretButton>();
-        turretShopCvg = GetComponent<CanvasGroup>();
     }
 
     private void OnEnable()
@@ -87,7 +85,6 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
 
         turretInstance.Init(turretInstanceInfo);
         CommonFunctions.EnableByCanvasGroup(turretInstanceCvg, true);
-        CommonFunctions.EnableByCanvasGroup(turretShopCvg, false);
     }
 
     public void UpdateTurretInstanceUIPos(Vector3 mousePos)
@@ -107,7 +104,7 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
 
         TurretBase newTurret = Instantiate<TurretBase>(turretPrefab, turretInstancePos, Quaternion.identity, turretManagerTrans);
         newTurret.Init(turretInstanceInfo);
-
+        newTurret.EnableShootRangeShow(false);
         isBuyingTurret = false;
 
         EnableTurretInstance(false);
@@ -118,6 +115,5 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
         isBuyingTurret = false;
 
         EnableTurretInstance(false);
-        CommonFunctions.EnableByCanvasGroup(turretShopCvg, true);
     }
 }

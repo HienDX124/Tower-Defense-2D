@@ -27,11 +27,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         EventDispatcher.Instance.RemoveListener(EventID.EnemyDie, HandleEnemyDie);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T)) _ = StartPlay();
-    }
-
     private void HandleEnemyDie(object param = null)
     {
         Enemy e = (Enemy)param;
@@ -58,7 +53,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             totalEnemy += waveInfo.numOfEnemyInWave;
         }
-        _levelCoins = currentLevelInfo.startCoins;
+        _levelCoins = 0;
+        IncreaseCoins(currentLevelInfo.startCoins);
         EnemyManager.instance.Init(totalEnemy);
         EventDispatcher.Instance.PostEvent(EventID.LoadLevel);
     }

@@ -12,6 +12,7 @@ public class TurretBase : MonoBehaviour
     [SerializeField] private CircleCollider2D _circleCollider2D;
     private Queue<Enemy> enemiesInRange;
     [SerializeField] private Transform shootRangeImgTrans;
+    private SpriteRenderer shootRange;
     private bool _isActive;
     [SerializeField] private SpriteRenderer bodyIcon;
     [SerializeField] private SpriteRenderer barrelIcon;
@@ -22,6 +23,7 @@ public class TurretBase : MonoBehaviour
     private void Awake()
     {
         enemiesInRange = new Queue<Enemy>();
+        shootRange = shootRangeImgTrans.GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
@@ -34,6 +36,21 @@ public class TurretBase : MonoBehaviour
         _circleCollider2D = GetComponent<CircleCollider2D>();
         _circleCollider2D.radius = activeRadius;
         shootRangeImgTrans.localScale = Vector3.one * (activeRadius * 2);
+    }
+
+    private void OnMouseDown()
+    {
+        EnableShootRangeShow(true);
+    }
+
+    private void OnMouseUp()
+    {
+        EnableShootRangeShow(false);
+    }
+
+    public void EnableShootRangeShow(bool enable)
+    {
+        shootRange.enabled = enable;
     }
 
     private void Update()

@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     public async UniTask StartMove(int delay)
     {
         List<Vector3> pathPointList = movePath;
-        movingSequence.Append(this.transform.DOPath(pathPointList.ToArray(), 10f));
+        movingSequence.Append(this.transform.DOPath(pathPointList.ToArray(), 15f));
         movingSequence.SetEase(Ease.Linear);
         this.transform.position = movePath[0];
         await UniTask.Delay(delay);

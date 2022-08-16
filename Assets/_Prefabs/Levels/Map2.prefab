@@ -97,12 +97,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainPath: {fileID: 768210982057491176}
-  startCoins: 50
-  delayPerWave: 7000
+  startCoins: 80
+  delayPerWave: 8000
   waveInfos:
-  - numOfEnemyInWave: 1
+  - numOfEnemyInWave: 10
+    enemyType: 0
+    delayPerEnemy: 1600
+  - numOfEnemyInWave: 15
+    enemyType: 0
+    delayPerEnemy: 1800
+  - numOfEnemyInWave: 15
     enemyType: 0
     delayPerEnemy: 1000
+  - numOfEnemyInWave: 20
+    enemyType: 0
+    delayPerEnemy: 2000
 --- !u!1 &768210982057491182
 GameObject:
   m_ObjectHideFlags: 0
