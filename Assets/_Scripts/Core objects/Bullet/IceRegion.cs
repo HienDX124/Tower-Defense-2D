@@ -28,6 +28,15 @@ public class IceRegion : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            _ = other.gameObject.GetComponent<Enemy>().GetIceEffect(this.slowRate, slowDur);
+            this.GetComponent<Collider2D>().enabled = false;
+        }
+    }
+
     public void Active(float slowDur, float slowRate, float maxRangeRadius, float showDur, float disappearDur)
     {
         this.slowRate = slowRate;
@@ -38,8 +47,9 @@ public class IceRegion : MonoBehaviour
         activeSequence.Append(this.icon.DOFade(0f, disappearDur));
 
         activeSequence
-            .Play();
-        Destroy(this, 0.1f);
+            .OnComplete(() => Destroy(this.gameObject, 0.1f))
+            .Play()
+            ;
     }
 
 }

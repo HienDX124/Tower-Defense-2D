@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private HPBar hPBar;
     public int coinReward;
     private bool onFireEffect;
+    private bool onIceEffect;
+    private bool onPoisonEffect;
     [SerializeField] private SpriteRenderer enemyIcon;
 
     private void Awake()
@@ -32,8 +34,12 @@ public class Enemy : MonoBehaviour
     public async UniTask StartMove(int delay)
     {
         List<Vector3> pathPointList = movePath;
-        movingSequence.Append(this.transform.DOPath(pathPointList.ToArray(), 15f));
-        movingSequence.SetEase(Ease.Linear);
+        movingSequence
+            .Append(this.transform.DOPath(pathPointList.ToArray(), 15f))
+            .SetEase(Ease.Linear)
+            .OnComplete(() => EventDispatcher.Instance.PostEvent(EventID.EnemyReachBase, this))
+            ;
+
         this.transform.position = movePath[0];
         await UniTask.Delay(delay);
         movingSequence.Play();
@@ -63,15 +69,29 @@ public class Enemy : MonoBehaviour
     public async UniTask GetFireEffect(float effectDur)
     {
         onFireEffect = true;
+        if (onIceEffect)
+        {
+            onIceEffect = false;
+            movingSequence.timeScale = 1f;
+        }
+
         await UniTask.Delay((int)(effectDur * 1000));
         onFireEffect = false;
     }
 
     public async UniTask GetIceEffect(float slowRate, float slowDur)
     {
+        onIceEffect = true;
+        if (onFireEffect)
+        {
+            onFireEffect = false;
+        }
+
         movingSequence.timeScale = slowRate;
+
         await UniTask.Delay((int)(slowDur * 1000));
         movingSequence.timeScale = 1f;
+        onIceEffect = false;
     }
 
     public void ShowEffect(float duration, TurretType effectType)

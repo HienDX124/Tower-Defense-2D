@@ -12,17 +12,26 @@ public class EnemyManager : SingletonMonobehaviour<EnemyManager>
     private void OnEnable()
     {
         EventDispatcher.Instance.RegisterListener(EventID.EnemyDie, UpdateEnemyList);
+        EventDispatcher.Instance.RegisterListener(EventID.EndLevel, ClearAllEnemy);
     }
 
     private void OnDisable()
     {
         EventDispatcher.Instance.RemoveListener(EventID.EnemyDie, UpdateEnemyList);
+        EventDispatcher.Instance.RemoveListener(EventID.EndLevel, ClearAllEnemy);
     }
     public void Init(int totalEnemy)
     {
         enemyMovePath = GameManager.instance.mainPathPoints;
         enemyList = new List<Enemy>();
-        // SpawnEnemies(totalEnemy);
+    }
+
+    private void ClearAllEnemy(object param = null)
+    {
+        foreach (Enemy enemy in FindObjectsOfType<Enemy>())
+        {
+            if (enemy) Destroy(enemy.gameObject);
+        }
     }
 
     private Enemy SpawnEnemy(int id, Enemy enemyPrefab = null)

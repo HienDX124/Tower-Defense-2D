@@ -55,7 +55,7 @@ public class TurretBase : MonoBehaviour
 
     private void Update()
     {
-        if (enemiesInRange.Count <= 0) return;
+        if (enemiesInRange.Count <= 0 || !enemiesInRange.Peek()) return;
 
         Vector2 enemyDir = this.transform.position - enemiesInRange.Peek().transform.position;
         float rotZ = Mathf.Atan2(enemyDir.y, enemyDir.x) * Mathf.Rad2Deg;

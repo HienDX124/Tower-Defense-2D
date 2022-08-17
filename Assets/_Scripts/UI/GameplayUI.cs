@@ -34,13 +34,13 @@ public class GameplayUI : SingletonMonobehaviour<GameplayUI>
 
     private void StartSpawnEnemyButtonOnClick()
     {
-        _ = GameManager.instance.StartPlay();
-        startSpawnEnemyButton.GetComponent<CanvasGroup>().alpha = 0f;
+        StartCoroutine(GameManager.instance.co);
+        startSpawnEnemyButton.gameObject.SetActive(false);
     }
 
     private void HandleLoadLevelEvent(object param = null)
     {
-        startSpawnEnemyButton.GetComponent<CanvasGroup>().alpha = 1f;
+        startSpawnEnemyButton.gameObject.SetActive(true);
     }
 
     private void UpdateCoinUI(object param = null)

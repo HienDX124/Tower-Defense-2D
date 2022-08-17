@@ -6,7 +6,9 @@ public enum EventID
     Pause,
     NextLevel,
     EnemyDie,
+    EnemyReachBase,
     UpdateCoin,
     StartBuyTurret,
     LoadLevel,
+    EndLevel,
 }

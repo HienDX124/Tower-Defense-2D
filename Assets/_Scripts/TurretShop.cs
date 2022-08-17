@@ -105,6 +105,7 @@ public class TurretShop : SingletonMonobehaviour<TurretShop>
         TurretBase newTurret = Instantiate<TurretBase>(turretPrefab, turretInstancePos, Quaternion.identity, turretManagerTrans);
         newTurret.Init(turretInstanceInfo);
         newTurret.EnableShootRangeShow(false);
+        TurretManager.instance.AddNewTurretBuilt(newTurret);
         isBuyingTurret = false;
 
         EnableTurretInstance(false);
