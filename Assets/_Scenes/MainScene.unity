@@ -4072,7 +4072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textContainer: {fileID: 2114074107}
-  textPrefab: {fileID: 4588265219073005405, guid: 5e8a596f07488d1409663488c5b3c9ac, type: 3}
+  textPrefab: {fileID: 2366314494140016264, guid: 5e8a596f07488d1409663488c5b3c9ac, type: 3}
   playerCamera: {fileID: 519420031}
 --- !u!1 &2126639497
 GameObject:

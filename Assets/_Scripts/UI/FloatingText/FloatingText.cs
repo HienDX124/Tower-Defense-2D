@@ -5,50 +5,38 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FloatingText
+public class FloatingText : MonoBehaviour
 {
-    public bool active;
-    public GameObject go;
-    public Text txt;
-    public Vector3 motion;
-    public float duration;
-    public float lastShown;
-    public CanvasGroup canvasGroup;
-    public void Show()
+    private bool _active;
+    public bool active => _active;
+    [SerializeField] private Text textComponent;
+    [SerializeField] private CanvasGroup canvasGroup;
+    private Sequence mainSequence;
+
+    public void Show(string msg, int fontSize, Color color, Vector3 startPos, Vector3 endPos, float duration)
     {
-        active = true;
-        lastShown = Time.time;
-        go.SetActive(active);
+        _active = true;
         canvasGroup.alpha = 1f;
-        _ = FadeOutAfter((int)(duration * 500));
-    }
+        textComponent.text = msg;
+        textComponent.fontSize = fontSize;
+        textComponent.color = color;
+        this.transform.position = startPos;
 
-    public void Hide()
-    {
-        active = false;
-        go.SetActive(active);
-    }
+        mainSequence = MoveUpAndFadeOut(endPos, duration);
 
-    private async UniTask FadeOutAfter(int delay)
-    {
-        await UniTask.Delay(delay);
-        canvasGroup.DOFade(0f, 0.5f)
+        mainSequence
+            .OnComplete(() => _active = false)
+            .OnKill(() => _active = false)
             .Play();
     }
 
-    public void UpdateFloatingText()
+    private Sequence MoveUpAndFadeOut(Vector3 endPos, float duration)
     {
-        if (!active)
-        {
-            return;
-        }
-        if (Time.time - lastShown > duration)
-        {
-            Hide();
-        }
+        Sequence sequence = DOTween.Sequence();
 
-        go.transform.position += motion * Time.deltaTime;
-
+        sequence
+            .Append(this.transform.DOMove(endPos, duration))
+            .Join(this.canvasGroup.DOFade(0f, duration));
+        return sequence;
     }
-
 }

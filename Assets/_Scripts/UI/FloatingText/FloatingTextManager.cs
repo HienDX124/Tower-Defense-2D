@@ -5,55 +5,45 @@ using UnityEngine.UI;
 
 public class FloatingTextManager : SingletonMonobehaviour<FloatingTextManager>
 {
-    public GameObject textContainer;
-    public GameObject textPrefab;
-
-    public Camera playerCamera;
+    public FloatingText textPrefab;
     private List<FloatingText> floatingTexts = new List<FloatingText>();
-
-    void Update()
-    {
-        foreach (FloatingText floatingText in floatingTexts)
-        {
-            floatingText.UpdateFloatingText();
-        }
-    }
 
     private FloatingText GetFloatingText()
     {
-        FloatingText txt = floatingTexts.Find(t => !t.active);
-        if (txt == null)
+        FloatingText floatingText = floatingTexts.Find(t => !t.active);
+        if (floatingText == null)
         {
-            txt = new FloatingText();
-            txt.go = Instantiate(textPrefab);
-            txt.go.transform.SetParent(textContainer.transform);
-            txt.txt = txt.go.GetComponent<Text>();
-            txt.canvasGroup = txt.go.GetComponent<CanvasGroup>();
-
-            floatingTexts.Add(txt);
+            floatingText = Instantiate(textPrefab, this.transform);
+            floatingTexts.Add(floatingText);
         }
-        return txt;
+        return floatingText;
     }
 
-    public void Show(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            ShowMoveYRay("HienDX say hi", 35, Color.cyan, this.transform.position, 80f, 2f);
+        }
+    }
+
+    public void Show(string msg, int fontSize, Color color, Vector3 startPos, Vector3 endPos, float duration)
     {
         FloatingText floatingText = GetFloatingText();
-        floatingText.txt.text = msg;
-        floatingText.txt.fontSize = fontSize;
-        floatingText.txt.color = color;
-
-        // Vector3 showPos = new Vector3(Camera.main.WorldToScreenPoint(position).x, Camera.main.WorldToScreenPoint(position).y, -1);
-        floatingText.go.transform.position = playerCamera.WorldToScreenPoint(position);
-        floatingText.motion = motion;
-        floatingText.duration = duration;
-
-        floatingText.Show();
+        floatingText.Show(msg, fontSize, color, startPos, endPos, duration);
     }
 
-    public void ShowUpdateHP(string hp, Vector3 position)
+
+    public void ShowMoveYRay(string msg, int fontSize, Color color, Vector3 startPos, float yRayChangeAmount, float duration)
     {
-        Show(hp, 35, Color.red, position, Vector3.up * 70, 1.5f);
+        FloatingText floatingText = GetFloatingText();
+        Vector3 endPos = new Vector3(startPos.x, startPos.y + yRayChangeAmount, startPos.z);
+        floatingText.Show(msg, fontSize, color, startPos, endPos, duration);
     }
 
+    public void ShowUpdateHP(string hp, Vector3 startPos)
+    {
 
+        ShowMoveYRay(hp, 35, Color.red, startPos, startPos.y + 5, 1.5f);
+    }
 }
